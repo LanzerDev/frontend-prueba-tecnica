@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Game } from '../interfaces/game';
-import { Genre } from '../enums/genre';
-
+import { enviroment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,28 +10,28 @@ import { Genre } from '../enums/genre';
 
 export class GamesService {
 
-  private api = '/api'
+  private apiUrl = enviroment.apiUrl
 
   constructor(private http: HttpClient) { }
 
   getGames(): Observable<Game[]>{
-    return this.http.get<Game[]>(`${this.api}/games`)
+    return this.http.get<Game[]>(`${this.apiUrl}/games`)
   }
 
   getGamesByGenre(genre: string): Observable<Game[]>{
-    return this.http.get<Game[]>(`${this.api}/games?category=${genre}`)
+    return this.http.get<Game[]>(`${this.apiUrl}/games?category=${genre}`)
   }
 
   getGamesByPlatform(platform: string): Observable<Game[]>{
-    return this.http.get<Game[]>(`${this.api}/games?platform=${platform}`)
+    return this.http.get<Game[]>(`${this.apiUrl}/games?platform=${platform}`)
   }
 
   getGamesByGenreAndPlatform(genre: string, platform: string): Observable<Game[]>{
-    return this.http.get<Game[]>(`${this.api}/games?platform=${platform}&category=${genre}`)
+    return this.http.get<Game[]>(`${this.apiUrl}/games?platform=${platform}&category=${genre}`)
   }
 
   getGameById(id: string): Observable<Game> {
-    return this.http.get<Game>(`${this.api}/game?id=${id}`);
+    return this.http.get<Game>(`${this.apiUrl}/game?id=${id}`);
   }
 
 }

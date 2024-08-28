@@ -1,0 +1,60 @@
+<div class="container">
+  
+  <h1 class="my-4">Listado de Juegos</h1>
+
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="searchForm" class="mb-4">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar por título"
+          formControlName="searchTitle"
+        >
+      </form>
+      <!--genre dropdown-->
+      <div ngbDropdown class="d-inline-block mb-4" style="margin-right: 10px;">
+        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+          {{ selectedGenre ? selectedGenre : 'Generos' }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem 
+                  *ngFor="let genre of genres"
+                  (click)="selectGenre(genre)"
+          >{{ genre }}</button>
+          <button ngbDropdownItem (click)="selectGenre('Todos los géneros')">Todos los géneros</button>
+        </div>
+      </div>
+      <!--platform dropdown-->
+      <div ngbDropdown class="d-inline-block mb-4">
+        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+          {{ selectedPlatform ? selectedPlatform : 'Plataforma' }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem 
+                  *ngFor="let platform of platforms"
+                  (click)="selectPlatform(platform)"
+          >{{ platform }}</button>
+          <button ngbDropdownItem (click)="selectPlatform('Todas las plataformas')">Todas las plataformas</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    @for (game of filteredGames; track game.title; let i = $index) {
+      <div class="col-sm-4 mb-4">
+        <div class="card">
+          <img [src]="game.thumbnail" class="card-img-top" [alt]="game.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ game.title }}</h5>
+            <p class="card-text">{{ game.short_description }}</p>
+            <p class="card-text"><strong>Platform: </strong> {{game.platform}}</p>
+            <a [routerLink]="['/game', game.id]" class="btn btn-primary">See more</a>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

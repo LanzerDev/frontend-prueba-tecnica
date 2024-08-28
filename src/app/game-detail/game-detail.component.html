@@ -1,0 +1,24 @@
+<div class="container mt-4" *ngIf="game">
+    <h1>{{ game.title }}</h1>
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <img [src]="game.thumbnail" [alt]="game.title" class="img-fluid mb-3">
+    </div>
+    <p><strong>Genre:</strong> {{ game.genre }}</p>
+    <p><strong>Platform:</strong> {{ game.platform }}</p>
+    <p><strong>Developer:</strong> {{ game.developer }}</p>
+    <p><strong>Release date:</strong> {{ game.release_date }}</p>
+    <h2>Description</h2>
+    <p>{{ game.description }}</p>
+    <h2>Minimum system requirements</h2>
+    <ul>
+      <li *ngFor="let req of game.minimum_system_requirements | keyvalue">
+        <strong>{{ req.key }}:</strong> {{ req.value }}
+      </li>
+    </ul>
+    <h2>Screenshots</h2>
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let screenshot of game.screenshots">
+        <img [src]="screenshot.image" [alt]="game.title" class="img-fluid">
+      </div>
+    </div>
+</div>

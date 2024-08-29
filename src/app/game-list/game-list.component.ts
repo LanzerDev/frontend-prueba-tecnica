@@ -97,6 +97,7 @@ export class GameListComponent implements OnInit{
     this.gameService.getGamesByPlatform(this.selectedPlatform).subscribe({
       next: (games) => {
         this.filteredGames = games;
+        console.log(games)
       },
       error: (error) => {
         console.log('Error fetching games');
@@ -108,6 +109,7 @@ export class GameListComponent implements OnInit{
     this.gameService.getGamesByGenre(this.selectedGenre).subscribe({
       next: (games) => {
         this.filteredGames = games;
+        console.log(games)
       },
       error: (error) => {
         console.log('Error fetching games');
@@ -129,6 +131,7 @@ export class GameListComponent implements OnInit{
     this.gameService.getGamesByGenreAndPlatform(genre, platform).subscribe({
       next: (games) => {
         this.filteredGames = games;
+        console.log(games)
       },
       error: (error) => {
         console.log('Error fetching games');
